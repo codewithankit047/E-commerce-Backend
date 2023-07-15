@@ -35,8 +35,9 @@ app.post("/add-product", async (req, resp) => {
   resp.send(result);
 });
 
-app.get("/get-product", async (req, resp) => {
-  let products = await Product.find();
+app.get("/get-product/:id", async (req, resp) => {
+  let products = await Product.find({ user_id: req.params.id });
+  console.log(req.params.id);
   if (products.length > 0) {
     resp.send(products);
   } else {
